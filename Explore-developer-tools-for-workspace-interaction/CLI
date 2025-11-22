@@ -1,0 +1,24 @@
+#You can install the Azure Machine Learning extension ml with the following command:
+az extension add -n ml -y
+
+#Help command
+az ml -h
+
+#Create a compute target
+az ml compute create --name aml-cluster --size STANDARD_DS3_v2 --min-instances 0 --max-instances 5 --type AmlCompute --resource-group my-resource-group --workspace-name my-workspace
+
+#You can also create the same compute target by first defining the configuration in a YAML file:
+#==============================================================================================
+$schema: https://azuremlschemas.azureedge.net/latest/amlCompute.schema.json 
+name: aml-cluster
+type: amlcompute
+size: STANDARD_DS3_v2
+min_instances: 0
+max_instances: 5
+#===============================================================================================
+
+#When you saved the YAML file as compute.yml, you can create the compute target with the following command:
+#==========================================================================================================
+az ml compute create --file compute.yml --resource-group my-resource-group --workspace-name my-workspace
+#==========================================================================================================
+
